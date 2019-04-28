@@ -1,0 +1,30 @@
+<html>
+
+<head>
+    <title>Input mu ? Severiz </title>
+</head>
+
+<body>
+    <h2> Gönder Gelsin </h2>
+    <form action="{{ req.path }}" method="POST">
+            {% for field in input_form %}
+                {% if field.name == 'csrf_token' %}
+                    {{ field }}
+                {% else %}
+                    {{ field.label }}: {{ field }}
+                {% endif %}
+                
+            {% endfor %}
+        <button type="submit"> Gönder </button>
+    </form>
+    <br>
+    <div>
+        {% for field, errors in input_form.errors.items() %}
+
+        <small >{{ input_form[field].label }}: {{' '.join(errors)}}</small>
+        <br>
+
+        {% endfor %}
+    </div>
+</body>
+</html>
